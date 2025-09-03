@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile"; // Adjust path
 
 const Projects = () => {
+  const isMobile = useIsMobile();
+
   const projects = [
     {
       id: 1,
@@ -23,7 +26,6 @@ const Projects = () => {
       live: "https://example.com",
       featured: true
     },
-
   ];
 
   return (
@@ -40,12 +42,12 @@ const Projects = () => {
         </div>
 
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className={`grid ${isMobile ? "grid-cols-1" : "md:grid-cols-2"} gap-8`}>
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className={`group glass rounded-3xl overflow-hidden hover-glow transition-all duration-500 ${
-                project.featured ? 'md:col-span-2 lg:col-span-1' : ''
+              className={`group glass rounded-3xl overflow-hidden transition-all duration-500 ${
+                project.featured && !isMobile ? 'md:col-span-2 lg:col-span-1' : ''
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -55,28 +57,31 @@ const Projects = () => {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ transform: isMobile ? "none" : undefined }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
                 
-                {/* Overlay buttons */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-2 rounded-lg hover:glow-primary transition-all duration-300"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-2 rounded-lg hover:glow-primary transition-all duration-300"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </div>
+                {/* Overlay buttons (only show hover on desktop) */}
+                {!isMobile && (
+                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass p-2 rounded-lg hover:glow-primary transition-all duration-300"
+                    >
+                      <Github className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass p-2 rounded-lg hover:glow-primary transition-all duration-300"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </a>
+                  </div>
+                )}
 
                 {project.featured && (
                   <div className="absolute top-4 left-4">
@@ -110,7 +115,7 @@ const Projects = () => {
                 </div>
 
                 {/* Action buttons */}
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     variant="outline"
                     size="sm"
