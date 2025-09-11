@@ -20,10 +20,10 @@ const Projects = () => {
       id: 2,
       title: "AI-Powered Analytics Dashboard",
       description: "Real-time data visualization platform with machine learning insights and predictive analytics.",
-      tech: ["Vue.js", "Python", "TensorFlow", "D3.js"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-      github: "https://github.com",
-      live: "https://example.com",
+      tech: ["React", "Node.js", "MongoDB atlas", "Express"],
+      image: "./RecipeHub",
+      github: "https://github.com/HemG12/Recipe_Hub",
+      live: "https://recipe-hub-sigma-three.vercel.app/",
       featured: true
     },
   ];

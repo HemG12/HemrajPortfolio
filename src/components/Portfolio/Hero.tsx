@@ -100,7 +100,7 @@ const Hero = () => {
               <Mail className="w-6 h-6" />
             </a>
             <a
-              href="/HemResume.pdf"
+              href="/HemFinalResume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="glass p-4 rounded-2xl hover-glow transition-all duration-300"
